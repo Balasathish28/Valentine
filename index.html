@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Pavithra ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -56,7 +56,6 @@ button{
   border-radius:30px;
   cursor:pointer;
   margin-top:20px;
-  font-weight:bold;
 }
 
 /* Sunset animated glow */
@@ -102,9 +101,10 @@ button{
   transform: translate(-50%, -50%);
   max-height: 100vh;
   max-width: 100%;
-  object-fit: cover;
-  z-index:0;
+  object-fit: contain;
+  z-index:0; /* behind text */
 }
+
 
 /* ---------------- CARD ---------------- */
 .card{
@@ -117,7 +117,7 @@ button{
   border-radius:25px;
   text-align:center;
   display:none;
-  z-index:2;
+  z-index:2; /* above background */
 }
 
 .profile{
@@ -138,12 +138,12 @@ button{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  height:100vh;
-  width:auto;
-  max-width:100vw;
-  z-index:1;
-  display:none;
-  filter:brightness(0.7);
+  height:100vh;      /* fill screen height */
+  width:auto;        /* maintain aspect ratio */
+  max-width:100vw;   /* do not overflow width */
+  z-index:1;         /* behind card */
+  display:none;      /* show when proposal starts */
+  filter:brightness(0.7); /* darken for readability */
 }
 
 /* ---------------- FINAL SCREEN ---------------- */
@@ -154,7 +154,16 @@ button{
   justify-content:center;
   align-items:flex-end;
   flex-direction:column;
-  font-family:'Dancing Script', cursive;
+}
+
+.eiffel{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  height:100%;
+  z-index:1;
+  filter:brightness(1.3) contrast(1.2);
 }
 
 .overlay{
@@ -207,18 +216,17 @@ button{
 }
 
 .loveText{
-  font-family:'Dancing Script', cursive;
-  font-size:60px;
-  letter-spacing:2px;
+  font-family:'Playfair Display', serif;
+  font-size:46px;
+  letter-spacing:3px;
   margin-bottom:120px;
   z-index:4;
-  background:linear-gradient(90deg,#ff5e62,#ff9966,#ff5e62);
+  background:linear-gradient(90deg,#d4af37,#fff5cc,#ffd700,#fff5cc,#d4af37);
   background-size:300% auto;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   animation: shimmer 6s linear infinite,
              fadePulse 4s ease-in-out infinite;
-  text-align:center;
 }
 @keyframes shimmer{
   0%{background-position:0% center;}
@@ -234,29 +242,29 @@ button{
 
 <body>
 
-<!-- SLIDE 1 -->
+<!-- SUNSET -->
 <div class="slide active" id="slide1">
-  <img src="images/potter.jpg" alt="Potter Magic">
+  <img src="images/sunset.jpg" alt="Golden Sunset">
   <div class="sunsetGlow"></div>
-  <h1>You are my every sunrise 🌅</h1>
-  <p>Every morning, my heart wakes up smiling because of you.</p>
+  <h1>Like a Golden Sunset 🌅</h1>
+  <p>Every evening sky reminds me how beautiful life feels with you.</p>
   <button onclick="nextSlide(1)">Next ❤️</button>
 </div>
 
-<!-- SLIDE 2 -->
+<!-- HARRY / POTTER -->
 <div class="slide" id="slide2">
   <img src="images/potter.jpg" alt="Hogwarts Magic">
-  <h1>My heart dances with your magic ✨</h1>
-  <p>No spell could ever match the enchantment of your love.</p>
-  <button onclick="nextSlide(2)">Next 💫</button>
+  <h1>Like Magic at Hogwarts ✨</h1>
+  <p>No spell was needed… you enchanted my heart naturally.</p>
+  <button onclick="nextSlide(2)">Next ⚡</button>
 </div>
 
-<!-- SLIDE 3 -->
+<!-- DISNEY -->
 <div class="slide" id="slide3">
-  <img src="images/potter.jpg" alt="Disney Magic">
+  <img src="images/disney.jpg" alt="Disney Magic">
   <canvas id="disneyFireworks"></canvas>
-  <h1>Life with you is my fairytale 🏰</h1>
-  <p>Every heartbeat, every smile, every glance is pure magic with you.</p>
+  <h1>Like a Disney Fairytale 🏰</h1>
+  <p>Life with you is my fairytale.</p>
   <button onclick="startProposal()">Continue 💖</button>
 </div>
 
@@ -271,8 +279,9 @@ button{
 
 <!-- FINAL -->
 <div class="final-screen" id="finalScreen">
+  <img src="images/eiffel.gif" class="eiffel">
   <div class="overlay"></div>
-  <div class="loveText">I LOVE YOU BABE ❤️</div>
+  <div class="loveText">I LOVE YOU ❤️</div>
 </div>
 
 <script>
@@ -283,8 +292,8 @@ function nextSlide(n){
 }
 function startProposal(){
   document.getElementById("slide3").classList.remove("active");
-  document.getElementById("proposalBg").style.display="block";
-  document.getElementById("box").style.display="block";
+  document.getElementById("proposalBg").style.display="block"; // show background
+  document.getElementById("box").style.display="block";        // show card
 }
 
 /* Wand sparkles */
@@ -340,7 +349,7 @@ function noClick(){
 }
 function yesClick(){
   document.getElementById("box").style.display="none";
-  document.getElementById("proposalBg").style.display="none";
+  document.getElementById("proposalBg").style.display="none"; // hide proposal bg
   document.getElementById("finalScreen").style.display="flex";
   startFinalEffects();
 }
@@ -379,4 +388,3 @@ function startFinalEffects(){
 
 </body>
 </html>
-
