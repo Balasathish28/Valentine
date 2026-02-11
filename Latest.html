@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Pavithra ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:black;
+  overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+}
+
+/* ---------------- SLIDES ---------------- */
+.slide{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  opacity:0;
+  transition:opacity 1.2s ease;
+  padding:20px;
+  overflow:hidden;
+}
+
+.slide.active{
+  opacity:1;
+  z-index:3;
+}
+
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:0;
+}
+
+.slide h1,.slide p,.slide button{
+  position:relative;
+  z-index:2;
+  max-width:700px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  margin-top:20px;
+  font-weight:bold;
+}
+
+/* Sunset animated glow */
+.sunsetGlow{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,#ff9a00,#ff5e62,#000);
+  opacity:0.4;
+  animation:sunsetMove 12s infinite alternate;
+}
+@keyframes sunsetMove{
+  from{transform:scale(1);}
+  to{transform:scale(1.2);}
+}
+
+/* Wand sparkles */
+.sparkle{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:gold;
+  pointer-events:none;
+  animation:sparkleFade 1s linear forwards;
+}
+@keyframes sparkleFade{
+  to{opacity:0; transform:scale(2);}
+}
+
+/* Disney fireworks canvas */
+#disneyFireworks{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+}
+
+/* Portrait / Fullscreen images */
+.slide img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
+  max-width: 100%;
+  object-fit: cover;
+  z-index:0;
+}
+
+/* ---------------- CARD ---------------- */
+.card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,0.75);
+  padding:35px;
+  border-radius:25px;
+  text-align:center;
+  display:none;
+  z-index:2;
+}
+
+.profile{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #ff4d6d;
+  margin-bottom:20px;
+}
+
+.yes{ background:#ff4d6d; color:white; }
+.no{ background:white; color:#ff4d6d; }
+
+/* ---------------- PROPOSAL BACKGROUND ---------------- */
+.proposal-bg{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  height:100vh;
+  width:auto;
+  max-width:100vw;
+  z-index:1;
+  display:none;
+  filter:brightness(0.7);
+}
+
+/* ---------------- FINAL SCREEN ---------------- */
+.final-screen{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:flex-end;
+  flex-direction:column;
+  font-family:'Dancing Script', cursive;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,
+    rgba(0,0,0,0.9),
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.9));
+  z-index:2;
+}
+
+/* Galaxy stars */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 3s infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0.2;}
+  50%{opacity:1;}
+}
+
+/* Shooting stars */
+.shooting-star{
+  position:absolute;
+  width:2px;
+  height:90px;
+  background:linear-gradient(gold, transparent);
+  transform:rotate(45deg);
+  animation:shoot 1.3s linear forwards;
+}
+@keyframes shoot{
+  from{opacity:1; transform:translate(0,0) rotate(45deg);}
+  to{opacity:0; transform:translate(-500px,500px) rotate(45deg);}
+}
+
+/* Love shower */
+.heart{
+  position:absolute;
+  top:-20px;
+  font-size:20px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+.loveText{
+  font-family:'Dancing Script', cursive;
+  font-size:60px;
+  letter-spacing:2px;
+  margin-bottom:120px;
+  z-index:4;
+  background:linear-gradient(90deg,#ff5e62,#ff9966,#ff5e62);
+  background-size:300% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation: shimmer 6s linear infinite,
+             fadePulse 4s ease-in-out infinite;
+  text-align:center;
+}
+@keyframes shimmer{
+  0%{background-position:0% center;}
+  100%{background-position:300% center;}
+}
+@keyframes fadePulse{
+  0%,100%{opacity:0.5;}
+  50%{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide1">
+  <img src="images/potter.jpg" alt="Potter Magic">
+  <div class="sunsetGlow"></div>
+  <h1>You are my every sunrise 🌅</h1>
+  <p>Every morning, my heart wakes up smiling because of you.</p>
+  <button onclick="nextSlide(1)">Next ❤️</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide2">
+  <img src="images/potter.jpg" alt="Hogwarts Magic">
+  <h1>My heart dances with your magic ✨</h1>
+  <p>No spell could ever match the enchantment of your love.</p>
+  <button onclick="nextSlide(2)">Next 💫</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide3">
+  <img src="images/potter.jpg" alt="Disney Magic">
+  <canvas id="disneyFireworks"></canvas>
+  <h1>Life with you is my fairytale 🏰</h1>
+  <p>Every heartbeat, every smile, every glance is pure magic with you.</p>
+  <button onclick="startProposal()">Continue 💖</button>
+</div>
+
+<!-- PROPOSAL -->
+<img src="images/EiffelTower.jpg" class="proposal-bg" id="proposalBg">
+<div class="card" id="box">
+  <img src="images/photo.jpg" class="profile">
+  <h2>Will you be my forever and always? 💖</h2>
+  <button class="yes" onclick="yesClick()">YES 😍</button>
+  <button class="no" onclick="noClick()">NO 😜</button>
+</div>
+
+<!-- FINAL -->
+<div class="final-screen" id="finalScreen">
+  <div class="overlay"></div>
+  <div class="loveText">I LOVE YOU PAVITHRA ❤️</div>
+</div>
+
+<script>
+/* Slide transitions */
+function nextSlide(n){
+  document.getElementById("slide"+n).classList.remove("active");
+  document.getElementById("slide"+(n+1)).classList.add("active");
+}
+function startProposal(){
+  document.getElementById("slide3").classList.remove("active");
+  document.getElementById("proposalBg").style.display="block";
+  document.getElementById("box").style.display="block";
+}
+
+/* Wand sparkles */
+document.getElementById("slide2").addEventListener("mousemove",e=>{
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=e.pageX+"px";
+  s.style.top=e.pageY+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),1000);
+});
+
+/* Disney fireworks */
+const canvas=document.getElementById("disneyFireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+function explode(x,y){
+  const colors=["#ffd700","#ffccd5","#fff5cc"];
+  for(let i=0;i<60;i++){
+    particles.push({
+      x,y,
+      angle:Math.random()*2*Math.PI,
+      speed:Math.random()*4+2,
+      life:80,
+      color:colors[Math.floor(Math.random()*colors.length)]
+    });
+  }
+}
+setInterval(()=>explode(Math.random()*canvas.width,Math.random()*canvas.height/2),1500);
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=Math.cos(p.angle)*p.speed;
+    p.y+=Math.sin(p.angle)*p.speed;
+    p.speed*=0.96;
+    p.life--;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fillStyle=p.color;
+    ctx.fill();
+  });
+  particles=particles.filter(p=>p.life>0);
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* Proposal buttons */
+function noClick(){
+  alert("You can't escape destiny 😉");
+  document.querySelector(".no").remove();
+}
+function yesClick(){
+  document.getElementById("box").style.display="none";
+  document.getElementById("proposalBg").style.display="none";
+  document.getElementById("finalScreen").style.display="flex";
+  startFinalEffects();
+}
+
+/* FINAL GALAXY EFFECTS */
+function startFinalEffects(){
+  for(let i=0;i<150;i++){
+    const star=document.createElement("div");
+    star.className="star";
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+    star.style.animationDuration=(Math.random()*3+2)+"s";
+    document.getElementById("finalScreen").appendChild(star);
+  }
+
+  setInterval(()=>{
+    const shoot=document.createElement("div");
+    shoot.className="shooting-star";
+    shoot.style.top=Math.random()*40+"vh";
+    shoot.style.left=Math.random()*80+"vw";
+    document.getElementById("finalScreen").appendChild(shoot);
+    setTimeout(()=>shoot.remove(),1300);
+  },1500);
+
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*3+3)+"s";
+    document.getElementById("finalScreen").appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },300);
+}
+</script>
+
+</body>
+</html>
