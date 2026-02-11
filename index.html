@@ -27,7 +27,6 @@ body{
   text-align:center;
   opacity:0;
   transition:opacity 1.2s ease;
-  padding:20px;
   overflow:hidden;
 }
 
@@ -40,7 +39,7 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.3);
   z-index:0;
 }
 
@@ -58,55 +57,47 @@ button{
   margin-top:20px;
 }
 
-/* Sunset animated glow */
-.sunsetGlow{
+/* ---------------- INTRO PAGE (4 images grid) ---------------- */
+#introSlide {
+  display:grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  gap:0;
+}
+
+#introSlide img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border:1px solid #ff4d6d;
+}
+
+.intro-overlay {
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at center,#ff9a00,#ff5e62,#000);
-  opacity:0.4;
-  animation:sunsetMove 12s infinite alternate;
-}
-@keyframes sunsetMove{
-  from{transform:scale(1);}
-  to{transform:scale(1.2);}
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
+  text-align:center;
+  color:white;
+  text-shadow:0 0 20px rgba(0,0,0,0.7);
 }
 
-/* Wand sparkles */
-.sparkle{
+/* ---------------- OTHER SLIDES ---------------- */
+.other-slide img {
   position:absolute;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:gold;
-  pointer-events:none;
-  animation:sparkleFade 1s linear forwards;
-}
-@keyframes sparkleFade{
-  to{opacity:0; transform:scale(2);}
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  max-width:100%;
+  max-height:100%;
+  object-fit:cover;
+  z-index:0;
 }
 
-/* Disney fireworks canvas */
-#disneyFireworks{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-}
-
-/* Portrait / Fullscreen images */
-.slide img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-height: 100vh;
-  max-width: 100%;
-  object-fit: contain;
-  z-index:0; /* behind text */
-}
-
-
-/* ---------------- CARD ---------------- */
+/* Proposal Card */
 .card{
   position:absolute;
   top:50%;
@@ -117,9 +108,8 @@ button{
   border-radius:25px;
   text-align:center;
   display:none;
-  z-index:2; /* above background */
+  z-index:2;
 }
-
 .profile{
   width:150px;
   height:150px;
@@ -128,22 +118,21 @@ button{
   border:4px solid #ff4d6d;
   margin-bottom:20px;
 }
-
 .yes{ background:#ff4d6d; color:white; }
 .no{ background:white; color:#ff4d6d; }
 
-/* ---------------- PROPOSAL BACKGROUND ---------------- */
+/* Proposal Background */
 .proposal-bg{
   position:fixed;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  height:100vh;      /* fill screen height */
-  width:auto;        /* maintain aspect ratio */
-  max-width:100vw;   /* do not overflow width */
-  z-index:1;         /* behind card */
-  display:none;      /* show when proposal starts */
-  filter:brightness(0.7); /* darken for readability */
+  height:100vh;
+  width:auto;
+  max-width:100vw;
+  z-index:1;
+  display:none;
+  filter:brightness(0.7);
 }
 
 /* ---------------- FINAL SCREEN ---------------- */
@@ -154,6 +143,7 @@ button{
   justify-content:center;
   align-items:flex-end;
   flex-direction:column;
+  overflow:hidden;
 }
 
 .eiffel{
@@ -165,7 +155,6 @@ button{
   z-index:1;
   filter:brightness(1.3) contrast(1.2);
 }
-
 .overlay{
   position:absolute;
   inset:0;
@@ -176,7 +165,7 @@ button{
   z-index:2;
 }
 
-/* Galaxy stars */
+/* Stars twinkle */
 .star{
   position:absolute;
   width:2px;
@@ -184,6 +173,7 @@ button{
   background:white;
   border-radius:50%;
   animation:twinkle 3s infinite;
+  z-index:3;
 }
 @keyframes twinkle{
   0%,100%{opacity:0.2;}
@@ -198,23 +188,26 @@ button{
   background:linear-gradient(gold, transparent);
   transform:rotate(45deg);
   animation:shoot 1.3s linear forwards;
+  z-index:3;
 }
 @keyframes shoot{
   from{opacity:1; transform:translate(0,0) rotate(45deg);}
   to{opacity:0; transform:translate(-500px,500px) rotate(45deg);}
 }
 
-/* Love shower */
+/* Falling hearts */
 .heart{
   position:absolute;
   top:-20px;
   font-size:20px;
   animation:fall linear forwards;
+  z-index:3;
 }
 @keyframes fall{
   to{transform:translateY(110vh);}
 }
 
+/* Love Text */
 .loveText{
   font-family:'Playfair Display', serif;
   font-size:46px;
@@ -225,8 +218,7 @@ button{
   background-size:300% auto;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation: shimmer 6s linear infinite,
-             fadePulse 4s ease-in-out infinite;
+  animation: shimmer 6s linear infinite, fadePulse 4s ease-in-out infinite;
 }
 @keyframes shimmer{
   0%{background-position:0% center;}
@@ -236,36 +228,46 @@ button{
   0%,100%{opacity:0.5;}
   50%{opacity:1;}
 }
-
 </style>
 </head>
-
 <body>
 
-<!-- SUNSET -->
-<div class="slide active" id="slide1">
+<!-- INTRO SLIDE -->
+<div class="slide active" id="introSlide">
+  <img src="images/pic1.jpg" alt="Pic 1">
+  <img src="images/pic2.jpg" alt="Pic 2">
+  <img src="images/pic3.jpg" alt="Pic 3">
+  <img src="images/pic4.jpg" alt="Pic 4">
+
+  <div class="intro-overlay">
+    <h1>Happy Valentine’s Day ❤️</h1>
+    <button onclick="nextSlide(0)">Open My Heart 💌</button>
+  </div>
+</div>
+
+<!-- SUNSET SLIDE -->
+<div class="slide other-slide" id="slide1">
   <img src="images/sunset.jpg" alt="Golden Sunset">
-  <div class="sunsetGlow"></div>
   <h1>Like a Golden Sunset 🌅</h1>
   <p>Every sunset I’ve shared with you in my snaps reminds me of your warmth and the beauty you bring into my life.</p>
   <button onclick="nextSlide(1)">Next ❤️</button>
 </div>
 
-<!-- HARRY / POTTER -->
-<div class="slide" id="slide2">
+<!-- HARRY / POTTER SLIDE -->
+<div class="slide other-slide" id="slide2">
   <img src="images/potter.jpg" alt="Hogwarts Magic">
   <h1>Like Magic at Hogwarts ✨</h1>
   <p>No spell was needed… you enchanted my heart naturally.</p>
   <button onclick="nextSlide(2)">Next ⚡</button>
 </div>
 
-<!-- DISNEY -->
-<div class="slide" id="slide3">
+<!-- DISNEY SLIDE -->
+<div class="slide other-slide" id="slide3">
   <img src="images/disney.jpg" alt="Disney Magic">
-  <canvas id="disneyFireworks"></canvas>
-  <h1>Like a Disney Fairytale 🏰</h1>
-  <p>Life with you is my fairytale.</p>
-  <button onclick="startProposal()">Continue 💖</button>
+  <canvas id="disneyFireworks" style="position:absolute;inset:0;z-index:1;"></canvas>
+  <h1 style="position:relative;z-index:2;">Like a Disney Fairytale 🏰</h1>
+  <p style="position:relative;z-index:2;">Life with you is my fairytale.</p>
+  <button onclick="startProposal()" style="position:relative;z-index:2;">Continue 💖</button>
 </div>
 
 <!-- PROPOSAL -->
@@ -285,108 +287,110 @@ button{
 </div>
 
 <script>
-/* Slide transitions */
 function nextSlide(n){
-  document.getElementById("slide"+n).classList.remove("active");
-  document.getElementById("slide"+(n+1)).classList.add("active");
-}
-function startProposal(){
-  document.getElementById("slide3").classList.remove("active");
-  document.getElementById("proposalBg").style.display="block"; // show background
-  document.getElementById("box").style.display="block";        // show card
-}
-
-/* Wand sparkles */
-document.getElementById("slide2").addEventListener("mousemove",e=>{
-  const s=document.createElement("div");
-  s.className="sparkle";
-  s.style.left=e.pageX+"px";
-  s.style.top=e.pageY+"px";
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),1000);
-});
-
-/* Disney fireworks */
-const canvas=document.getElementById("disneyFireworks");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-let particles=[];
-function explode(x,y){
-  const colors=["#ffd700","#ffccd5","#fff5cc"];
-  for(let i=0;i<60;i++){
-    particles.push({
-      x,y,
-      angle:Math.random()*2*Math.PI,
-      speed:Math.random()*4+2,
-      life:80,
-      color:colors[Math.floor(Math.random()*colors.length)]
-    });
+  if(n===0){
+    document.getElementById("introSlide").classList.remove("active");
+    document.getElementById("slide1").classList.add("active");
+  } else {
+    document.getElementById("slide"+n).classList.remove("active");
+    document.getElementById("slide"+(n+1)).classList.add("active");
   }
 }
-setInterval(()=>explode(Math.random()*canvas.width,Math.random()*canvas.height/2),1500);
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x+=Math.cos(p.angle)*p.speed;
-    p.y+=Math.sin(p.angle)*p.speed;
-    p.speed*=0.96;
-    p.life--;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,2,0,Math.PI*2);
-    ctx.fillStyle=p.color;
-    ctx.fill();
-  });
-  particles=particles.filter(p=>p.life>0);
-  requestAnimationFrame(animate);
-}
-animate();
 
-/* Proposal buttons */
+function startProposal(){
+  document.getElementById("slide3").classList.remove("active");
+  document.getElementById("proposalBg").style.display="block";
+  document.getElementById("box").style.display="block";
+}
+
 function noClick(){
   alert("You can't escape destiny 😉");
   document.querySelector(".no").remove();
 }
+
 function yesClick(){
   document.getElementById("box").style.display="none";
-  document.getElementById("proposalBg").style.display="none"; // hide proposal bg
+  document.getElementById("proposalBg").style.display="none";
   document.getElementById("finalScreen").style.display="flex";
   startFinalEffects();
 }
 
-/* FINAL GALAXY EFFECTS */
+/* ---------------- Disney Fireworks ---------------- */
+const canvas = document.getElementById("disneyFireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let particles = [];
+
+function explode(x, y){
+  const colors = ["#ffd700","#ffccd5","#fff5cc"];
+  for(let i=0;i<60;i++){
+    particles.push({
+      x, y,
+      angle: Math.random()*2*Math.PI,
+      speed: Math.random()*4+2,
+      life: 80,
+      color: colors[Math.floor(Math.random()*colors.length)]
+    });
+  }
+}
+
+setInterval(()=>{
+  explode(Math.random()*canvas.width, Math.random()*canvas.height/2);
+},1500);
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x += Math.cos(p.angle)*p.speed;
+    p.y += Math.sin(p.angle)*p.speed;
+    p.speed *= 0.96;
+    p.life--;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,2,0,Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+  });
+  particles = particles.filter(p=>p.life>0);
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ---------------- Final Screen Effects ---------------- */
 function startFinalEffects(){
+  const finalScreen=document.getElementById("finalScreen");
+
+  // Stars
   for(let i=0;i<150;i++){
     const star=document.createElement("div");
     star.className="star";
     star.style.top=Math.random()*100+"vh";
     star.style.left=Math.random()*100+"vw";
     star.style.animationDuration=(Math.random()*3+2)+"s";
-    document.getElementById("finalScreen").appendChild(star);
+    finalScreen.appendChild(star);
   }
 
+  // Shooting stars
   setInterval(()=>{
     const shoot=document.createElement("div");
     shoot.className="shooting-star";
     shoot.style.top=Math.random()*40+"vh";
     shoot.style.left=Math.random()*80+"vw";
-    document.getElementById("finalScreen").appendChild(shoot);
+    finalScreen.appendChild(shoot);
     setTimeout(()=>shoot.remove(),1300);
   },1500);
 
+  // Falling hearts
   setInterval(()=>{
     const heart=document.createElement("div");
     heart.className="heart";
     heart.innerHTML="❤️";
     heart.style.left=Math.random()*100+"vw";
     heart.style.animationDuration=(Math.random()*3+3)+"s";
-    document.getElementById("finalScreen").appendChild(heart);
+    finalScreen.appendChild(heart);
     setTimeout(()=>heart.remove(),6000);
   },300);
 }
 </script>
-
 </body>
 </html>
-
-
