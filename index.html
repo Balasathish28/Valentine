@@ -245,6 +245,61 @@ button{
     padding:10px 20px;
   }
 }
+/* ===== SWISS CINEMATIC EFFECTS ===== */
+
+.swiss-bg{
+  position:absolute;
+  inset:0;
+  background:url("images/switzerland.jpg") center/cover no-repeat;
+  z-index:0;
+  animation:slowZoom 25s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom{
+  from{transform:scale(1);}
+  to{transform:scale(1.15);}
+}
+
+.cold-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,80,150,0.25);
+  z-index:1;
+}
+
+@keyframes fogMove{
+  from{background-position:0 0;}
+  to{background-position:2000px 0;}
+}
+
+.snowflake{
+  position:absolute;
+  top:-10px;
+  color:white;
+  font-size:14px;
+  opacity:0.9;
+  animation:fallSnow linear forwards;
+  z-index:3;
+}
+
+@keyframes fallSnow{
+  to{
+    transform:translateY(110vh);
+    opacity:0.2;
+  }
+}
+
+.snow-ground{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:0;
+  background:linear-gradient(to top, white, rgba(255,255,255,0.8), transparent);
+  z-index:3;
+  transition:height 2s ease;
+}
+
 </style>
 </head>
 <body>
@@ -284,8 +339,28 @@ button{
   <canvas id="disneyFireworks" style="position:absolute;inset:0;z-index:1;"></canvas>
   <h1 style="position:relative;z-index:2;">Like a Disneyland 🏰</h1>
   <p style="position:relative;z-index:2;">You filled my life with happy rides and fireworks that never stop.</p>
-  <button onclick="startProposal()" style="position:relative;z-index:2;">Continue 💖</button>
+  <button onclick="nextSlide(3)" style="position:relative;z-index:2;">Next 💖</button>
 </div>
+
+<!-- SWITZERLAND SLIDE -->
+<div class="slide other-slide" id="slide4">
+  <div class="swiss-bg"></div>
+  <div class="cold-overlay"></div>
+  <div class="fog"></div>
+
+  <h1>Like Switzerland 🇨🇭</h1>
+  <p>
+    You took my breath away like the snowy mountains 🏔️,<br>
+    sweetened my life like Swiss chocolate 🍫,<br>
+    made every moment timeless like a luxury watch ⌚,<br>
+    and turned my world into a beautiful snowfall ❄️❤️
+  </p>
+
+  <div class="snow-ground"></div>
+
+  <button onclick="startProposal()">Continue 💞</button>
+</div>
+
 
 <!-- PROPOSAL -->
 <img src="images/EiffelTower.jpg" class="proposal-bg" id="proposalBg">
@@ -315,7 +390,7 @@ function nextSlide(n){
 }
 
 function startProposal(){
-  document.getElementById("slide3").classList.remove("active");
+  document.getElementById("slide4").classList.remove("active");
   document.getElementById("proposalBg").style.display="block";
   document.getElementById("box").style.display="block";
 }
@@ -406,8 +481,47 @@ function startFinalEffects(){
     setTimeout(()=>heart.remove(),6000);
   },300);
 }
+
+/* ===== SWISS EFFECTS ===== */
+
+let snowLevel = 0;
+const wind = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_4e9fdb9a9b.mp3?filename=wind-ambience-11005.mp3");
+wind.loop = true;
+
+setInterval(()=>{
+  const swissSlide = document.getElementById("slide4");
+
+  if(swissSlide && swissSlide.classList.contains("active")){
+
+    if(wind.paused){
+      wind.play().catch(()=>{});
+    }
+
+    const snow=document.createElement("div");
+    snow.className="snowflake";
+    snow.innerHTML="❄";
+    snow.style.left=Math.random()*100+"vw";
+    snow.style.animationDuration=(Math.random()*3+3)+"s";
+    swissSlide.appendChild(snow);
+    setTimeout(()=>snow.remove(),6000);
+
+    if(snowLevel < 140){
+      snowLevel += 0.4;
+      swissSlide.querySelector(".snow-ground").style.height = snowLevel + "px";
+    }
+
+  } else {
+    wind.pause();
+    wind.currentTime = 0;
+    snowLevel = 0;
+    if(swissSlide){
+      swissSlide.querySelector(".snow-ground").style.height="0px";
+    }
+  }
+
+},180);
+
 </script>
 </body>
 </html>
-
 
